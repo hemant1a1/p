@@ -197,52 +197,54 @@
                 <!-- Quick Summary -->
                 <div class="mt-4">
                 <h3 class="text-xl font-semibold mb-4 text-gray-800">Quick Summary</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <!-- Total Properties -->
-                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
-                    <div>
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-4 py-5 hover:shadow-xl">
+                    <div class="flex-1 min-w-0">
                         <p class="text-sm text-gray-500 font-medium">Total Properties</p>
                         <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mt-1">12</h3>
                     </div>
-                    <div class="w-16 h-16">
-                        <canvas id="chartProperties"></canvas>
+                    <div class="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 ml-4">
+                        <canvas id="chartProperties" class="w-full h-full"></canvas>
                     </div>
                     </div>
 
                     <!-- Rent Collected -->
-                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
-                    <div>
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-4 py-5 hover:shadow-xl">
+                    <div class="flex-1 min-w-0">
                         <p class="text-sm text-gray-500 font-medium">Rent Collected</p>
                         <h3 class="text-3xl font-extrabold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mt-1">90%</h3>
                     </div>
-                    <div class="w-16 h-16">
-                        <canvas id="chartRent"></canvas>
+                    <div class="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 ml-4">
+                        <canvas id="chartRent" class="w-full h-full"></canvas>
                     </div>
                     </div>
 
                     <!-- Total Tenants -->
-                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
-                    <div>
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-4 py-5 hover:shadow-xl">
+                    <div class="flex-1 min-w-0">
                         <p class="text-sm text-gray-500 font-medium">Total Tenants</p>
                         <h3 class="text-3xl font-extrabold bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent mt-1">45</h3>
                     </div>
-                    <div class="w-16 h-16">
-                        <canvas id="chartTenants"></canvas>
+                    <div class="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 ml-4">
+                        <canvas id="chartTenants" class="w-full h-full"></canvas>
                     </div>
                     </div>
 
                     <!-- Maintenance Requests -->
-                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
-                    <div>
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-4 py-5 hover:shadow-xl">
+                    <div class="flex-1 min-w-0">
                         <p class="text-sm text-gray-500 font-medium">Maintenance Requests</p>
                         <h3 class="text-3xl font-extrabold bg-gradient-to-r from-slate-600 to-gray-800 bg-clip-text text-transparent mt-1">5</h3>
                     </div>
-                    <div class="w-16 h-16">
-                        <canvas id="chartMaintenance"></canvas>
+                    <div class="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 ml-4">
+                        <canvas id="chartMaintenance" class="w-full h-full"></canvas>
                     </div>
                     </div>
                 </div>
                 </div>
+
+
             </div>
 
             <!-- Right Section: Chart + Maintenance List (Compact Version) -->
@@ -346,8 +348,7 @@
 
 
 
-        <!-- Recent Payments & Urgent Items -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
 
         <!-- Recent Payments -->
         <div class="bg-white/60 backdrop-blur-lg rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -357,43 +358,61 @@
                 Recent Payments
             </h3>
             </div>
-            <div class="overflow-x-auto">
-            <table class="w-full text-xs text-left text-gray-700">
-                <thead class="bg-indigo-600/10 text-indigo-600 uppercase text-xs border-b border-gray-200">
-                <tr>
-                    <th class="px-6 py-2 font-semibold">Tenant</th>
-                    <th class="px-6 py-2 font-semibold">Unit / Date</th>
-                    <th class="px-6 py-2 ont-semibold text-right">Amount</th>
-                    <th class="px-6 py-2 font-semibold text-right">Status</th>
-                </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Sarah Johnson</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Unit 3A – Nov 1st</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-right text-green-600 font-semibold">$1,200</td>
-                    <td class="px-6 py-3 text-right">
-                    <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Miko Chen</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Unit 2B – Nov 1st</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-right text-green-600 font-semibold">$1,400</td>
-                    <td class="px-6 py-3 text-right">
-                    <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Emily Davis</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Unit 1C – Oct 30th</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-right text-green-600 font-semibold">$1,100</td>
-                    <td class="px-6 py-3 text-right">
-                    <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="divide-y divide-gray-200 text-sm">
+            <!-- Desktop Header -->
+            <div class="hidden sm:grid grid-cols-4 px-6 py-2 bg-indigo-50/40 text-indigo-600 font-semibold uppercase text-xs">
+                <div>Tenant</div>
+                <div>Unit / Date</div>
+                <div class="text-right">Amount</div>
+                <div class="text-right">Status</div>
+            </div>
+
+            <!-- Row 1 -->
+            <div class="px-6 py-3 hover:bg-gray-50 transition space-y-1 sm:grid sm:grid-cols-4 sm:space-y-0 sm:items-center text-xs">
+                <!-- Mobile layout -->
+                <div class="flex justify-between sm:hidden text-gray-900 font-medium"><span>Tenant</span><span>Sarah Johnson</span></div>
+                <div class="flex justify-between sm:hidden text-gray-500"><span>Unit / Date</span><span>Unit 3A – Nov 1st</span></div>
+                <div class="flex justify-between sm:hidden text-green-600 font-semibold"><span>Amount</span><span>$1,200</span></div>
+                <div class="flex justify-between sm:hidden"><span>Status</span><span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span></div>
+
+                <!-- Desktop layout -->
+                <div class="hidden sm:block font-semibold text-gray-900">Sarah Johnson</div>
+                <div class="hidden sm:block text-gray-500">Unit 3A – Nov 1st</div>
+                <div class="hidden sm:block text-green-600 font-semibold text-right">$1,200</div>
+                <div class="hidden sm:block text-right">
+                <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="px-6 py-3 hover:bg-gray-50 transition space-y-1 sm:grid sm:grid-cols-4 sm:space-y-0 sm:items-center text-xs">
+                <div class="flex justify-between sm:hidden text-gray-900 font-medium"><span>Tenant</span><span>Miko Chen</span></div>
+                <div class="flex justify-between sm:hidden text-gray-500"><span>Unit / Date</span><span>Unit 2B – Nov 1st</span></div>
+                <div class="flex justify-between sm:hidden text-green-600 font-semibold"><span>Amount</span><span>$1,400</span></div>
+                <div class="flex justify-between sm:hidden"><span>Status</span><span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span></div>
+
+                <div class="hidden sm:block font-semibold text-gray-900">Miko Chen</div>
+                <div class="hidden sm:block text-gray-500">Unit 2B – Nov 1st</div>
+                <div class="hidden sm:block text-green-600 font-semibold text-right">$1,400</div>
+                <div class="hidden sm:block text-right">
+                <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="px-6 py-3 hover:bg-gray-50 transition space-y-1 sm:grid sm:grid-cols-4 sm:space-y-0 sm:items-center text-xs">
+                <div class="flex justify-between sm:hidden text-gray-900 font-medium"><span>Tenant</span><span>Emily Davis</span></div>
+                <div class="flex justify-between sm:hidden text-gray-500"><span>Unit / Date</span><span>Unit 1C – Oct 30th</span></div>
+                <div class="flex justify-between sm:hidden text-green-600 font-semibold"><span>Amount</span><span>$1,100</span></div>
+                <div class="flex justify-between sm:hidden"><span>Status</span><span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span></div>
+
+                <div class="hidden sm:block font-semibold text-gray-900">Emily Davis</div>
+                <div class="hidden sm:block text-gray-500">Unit 1C – Oct 30th</div>
+                <div class="hidden sm:block text-green-600 font-semibold text-right">$1,100</div>
+                <div class="hidden sm:block text-right">
+                <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -405,42 +424,57 @@
                 Urgent Items
             </h3>
             </div>
-            <div class="overflow-x-auto">
-            <table class="w-full text-xs text-left text-gray-700">
-                <thead class="bg-indigo-600/10 text-indigo-600 uppercase text-xs border-b border-gray-200">
-                <tr>
-                    <th class="px-6 py-2 font-semibold">Issue</th>
-                    <th class="px-6 py-2 font-semibold">Location</th>
-                    <th class="px-6 py-2 font-semibold text-right">Priority</th>
-                </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Water Heater</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Maple Heights</td>
-                    <td class="px-6 py-3 text-right">
-                    <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Overdue Rent</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Oak Plaza</td>
-                    <td class="px-6 py-3 text-right">
-                    <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Safety Check</td>
-                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Pine Court</td>
-                    <td class="px-6 py-3 text-right">
-                    <span class="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Medium</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="divide-y divide-gray-200 text-sm">
+            <!-- Desktop Header -->
+            <div class="hidden sm:grid grid-cols-3 px-6 py-2 bg-indigo-50/40 text-indigo-600 font-semibold uppercase text-xs">
+                <div>Issue</div>
+                <div>Location</div>
+                <div class="text-right">Priority</div>
+            </div>
+
+            <!-- Row 1 -->
+            <div class="px-6 py-3 hover:bg-gray-50 transition space-y-1 sm:grid sm:grid-cols-3 sm:space-y-0 sm:items-center text-xs">
+                <div class="flex justify-between sm:hidden text-gray-900 font-medium"><span>Issue</span><span>Water Heater</span></div>
+                <div class="flex justify-between sm:hidden text-gray-500"><span>Location</span><span>Maple Heights</span></div>
+                <div class="flex justify-between sm:hidden"><span>Priority</span><span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span></div>
+
+                <div class="hidden sm:block font-semibold text-gray-900">Water Heater</div>
+                <div class="hidden sm:block text-gray-500">Maple Heights</div>
+                <div class="hidden sm:block text-right">
+                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="px-6 py-3 hover:bg-gray-50 transition space-y-1 sm:grid sm:grid-cols-3 sm:space-y-0 sm:items-center text-xs">
+                <div class="flex justify-between sm:hidden text-gray-900 font-medium"><span>Issue</span><span>Overdue Rent</span></div>
+                <div class="flex justify-between sm:hidden text-gray-500"><span>Location</span><span>Oak Plaza</span></div>
+                <div class="flex justify-between sm:hidden"><span>Priority</span><span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span></div>
+
+                <div class="hidden sm:block font-semibold text-gray-900">Overdue Rent</div>
+                <div class="hidden sm:block text-gray-500">Oak Plaza</div>
+                <div class="hidden sm:block text-right">
+                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="px-6 py-3 hover:bg-gray-50 transition space-y-1 sm:grid sm:grid-cols-3 sm:space-y-0 sm:items-center text-xs">
+                <div class="flex justify-between sm:hidden text-gray-900 font-medium"><span>Issue</span><span>Safety Check</span></div>
+                <div class="flex justify-between sm:hidden text-gray-500"><span>Location</span><span>Pine Court</span></div>
+                <div class="flex justify-between sm:hidden"><span>Priority</span><span class="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Medium</span></div>
+
+                <div class="hidden sm:block font-semibold text-gray-900">Safety Check</div>
+                <div class="hidden sm:block text-gray-500">Pine Court</div>
+                <div class="hidden sm:block text-right">
+                <span class="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Medium</span>
+                </div>
+            </div>
             </div>
         </div>
         </div>
+
+
 
 
 
