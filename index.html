@@ -118,32 +118,32 @@
         </nav>
       </div>
 
-      <div class="px-3 py-2">
-        <div class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-xl p-2 shadow-sm text-gray-800 flex flex-col items-center justify-center space-y-1">
+        <div class="px-3 py-2">
+            <div class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-xl p-2 shadow-sm text-gray-800 flex flex-col items-center justify-center space-y-1">
 
-            <!-- Decorative SVG Layer -->
-            <svg class="absolute -top-4 -right-4 w-24 h-24 opacity-10" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="50" fill="white" />
-            </svg>
+                <!-- Decorative SVG Layer -->
+                <svg class="absolute -top-4 -right-4 w-24 h-24 opacity-10" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="50" fill="white" />
+                </svg>
 
-            <!-- Lottie Animation -->
-            <div class="w-24 h-24">
-            <lottie-player
-                src="/home.json"
-                background="transparent"
-                speed="1"
-                loop
-                autoplay
-            ></lottie-player>
+                <!-- Lottie Animation -->
+                <div class="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
+                <lottie-player
+                    src="/home.json"
+                    background="transparent"
+                    speed="1"
+                    loop
+                    autoplay
+                ></lottie-player>
+                </div>
+
+                <p class="text-[10px] text-gray-600 text-center leading-tight mb-3">Quick listing of your property.</p>
+                <!-- Stylish Compact Button -->
+                <button class="relative z-10 text-center uppercase w-full px-3 py-1 mt-1 bg-indigo-500 text-white text-xs rounded-md shadow hover:bg-indigo-600 transition">
+                Add Property
+                </button>
+
             </div>
-
-            <p class="text-[10px] text-gray-600 text-center leading-tight mb-3">Quick listing of your property.</p>
-            <!-- Stylish Compact Button -->
-            <button class="relative z-10 text-center uppercase w-full px-3 py-1 mt-1 bg-indigo-500 text-white text-xs rounded-md shadow hover:bg-indigo-600 transition">
-            Add Property
-            </button>
-
-        </div>
         </div>
 
 
@@ -153,27 +153,58 @@
     <main class="flex-1 overflow-y-auto relative">
       <!-- Header -->
       <header class="sticky top-0 z-40 w-full bg-gradient-to-r from-indigo-400 via-blue-500 to-purple-500 shadow-[0_1px_0_#0000000d] backdrop-blur-xl shadow-sm">
-        <div class="w-full bg-white/90 backdrop-blur-xl px-6 py-4 flex justify-between items-center">
-            <input
-            type="text"
-            placeholder="Search properties, tenants..."
-            class="w-full max-w-md p-3 bg-white/40 backdrop-blur-md rounded-xl text-sm placeholder:text-gray-500 border border-white/50 shadow-inner focus:ring-2 focus:ring-indigo-300 transition"
-            />
-            <div class="flex items-center gap-4 ml-6">
-                <i data-lucide="bell" class="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-500 transition"></i>
-                <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg font-semibold">
-                    HS
-                </div>
-            </div>
-            
-            <!-- Mobile Drawer Toggle (No Fixed) -->
-            <div class="md:hidden ml-6">
-                <button @click="open = true" class="p-2 bg-white shadow rounded-full">
-                <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
+        <div class="w-full bg-white/90 backdrop-blur-xl px-4 sm:px-6 py-3 flex flex-wrap sm:flex-nowrap justify-between items-center gap-4">
+
+            <!-- Search + AI Button -->
+            <div class="flex flex-1 items-center gap-3">
+            <!-- Stylish Search Bar -->
+            <div class="relative w-full max-w-md">
+                <input
+                type="text"
+                placeholder="Search properties, tenants..."
+                class="w-full pl-10 pr-20 py-2.5 text-sm rounded-xl bg-white/40 backdrop-blur-md border border-white/50 placeholder:text-gray-500 text-gray-800 shadow-inner focus:ring-2 focus:ring-indigo-300 transition"
+                />
+                <!-- Search Icon -->
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+
+                <!-- AI Assistant Button -->
+                <button
+                class="absolute right-2 top-1/2 -translate-y-1/2 bg-indigo-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-indigo-600 shadow transition-all"
+                >
+                AI
                 </button>
             </div>
+            </div>
+
+            <!-- Notification & Avatar -->
+            <div class="flex items-center gap-4">
+                <!-- Notification Icon with Background and Pulse -->
+                <div class="relative">
+                    <div class="w-10 h-10 bg-white/60 backdrop-blur-sm border border-white/50 rounded-xl flex items-center justify-center shadow-inner cursor-pointer hover:bg-white/70 transition">
+                        <i data-lucide="bell" class="w-5 h-5 text-indigo-600"></i>
+                    </div>
+
+                    <!-- Pulse Dot -->
+                    <span class="absolute top-0 right-0 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600 border-2 border-white"></span>
+                    </span>
+                </div>
+
+                <div class="w-10 h-10 bg-indigo-500 text-white rounded-xl flex items-center justify-center shadow-lg font-semibold">
+                    HS
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="md:hidden">
+                    <button @click="open = true" class="p-2 bg-white shadow rounded-xl">
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </header>
+    </header>
+
 
       <!-- Content Body -->
       <div class="p-6 pb-20">
