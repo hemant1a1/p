@@ -131,27 +131,43 @@
                 <div class="relative w-full rounded-2xl overflow-hidden text-white bg-gradient-to-tr from-indigo-600 via-purple-700 to-blue-500 shadow-lg">
                     <!-- Decorative SVG Waves -->
                     <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="#6EE7B7" fill-opacity="0.15" d="M0,160L80,154.7C160,149,320,139,480,149.3C640,160,800,192,960,186.7C1120,181,1280,139,1360,117.3L1440,96L1440,320L0,320Z"/>
-                        <path fill="#6366F1" fill-opacity="0.25" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,229.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L0,320Z"/>
+                        <path fill="#6EE7B7" fill-opacity="0.15"
+                        d="M0,160L80,154.7C160,149,320,139,480,149.3C640,160,800,192,960,186.7C1120,181,1280,139,1360,117.3L1440,96L1440,320L0,320Z" />
+                        <path fill="#6366F1" fill-opacity="0.25"
+                        d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,229.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L0,320Z" />
                     </svg>
 
-                    <!-- Content -->
-                    <div class="relative z-10 h-full w-full px-6 md:px-12 py-8 flex flex-col justify-between">
-                        <div class="flex justify-between items-start">
-                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
-                        <div class="w-8 h-8 bg-white rounded-full shadow-inner opacity-90"></div>
+                    <!-- Content + Lottie -->
+                    <div class="relative z-10 w-full px-6 md:px-12 py-8 lg:py-0 flex flex-col lg:flex-row items-center justify-between">
+                        <!-- Left Text Section -->
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
+                            </div>
+
+                            <p class="text-lg mt-2">
+                                Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
+                            </p>
+
+                            <div class="flex flex-wrap gap-3 mt-4">
+                                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
+                                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
+                            </div>
                         </div>
 
-                        <p class="text-lg mt-2">
-                        Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
-                        </p>
-
-                        <div class="flex flex-wrap gap-3 mt-4">
-                        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
-                        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
+                        <!-- Right Lottie Section -->
+                        <div class="hidden lg:flex justify-center items-center w-full lg:w-1/3 mt-6 lg:mt-0">
+                            <lottie-player 
+                                src="/house.json" 
+                                background="transparent" 
+                                speed="1" 
+                                style="width: 100%; max-width: 180px; height: 180px;" 
+                                loop 
+                                autoplay>
+                            </lottie-player>
                         </div>
                     </div>
-                </div>
+                    </div>
 
                 <!-- Quick Summary -->
                 <div class="mt-4">
@@ -364,57 +380,59 @@
       lucide.createIcons();
     </script>
 
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const createDoughnutChart = (id, value, fromColor, toColor) => {
-    const ctx = document.getElementById(id).getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 100, 0);
-    gradient.addColorStop(0, fromColor);
-    gradient.addColorStop(1, toColor);
+    <script>
+    const createDoughnutChart = (id, value, fromColor, toColor) => {
+        const ctx = document.getElementById(id).getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+        gradient.addColorStop(0, fromColor);
+        gradient.addColorStop(1, toColor);
 
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
+        new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+            data: [value, 100 - value],
+            backgroundColor: [gradient, '#e5e7eb'],
+            borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '75%',
+            plugins: { legend: { display: false }, tooltip: { enabled: false } }
+        }
+        });
+    };
+
+    createDoughnutChart('chartProperties', 80, '#3b82f6', '#8b5cf6');
+    createDoughnutChart('chartRent', 90, '#22c55e', '#3b82f6');
+    createDoughnutChart('chartTenants', 75, '#f97316', '#ec4899');
+    createDoughnutChart('chartMaintenance', 65, '#334155', '#1e293b');
+
+    // Main Chart (example bar)
+    const ctxMain = document.getElementById('mainChart').getContext('2d');
+    new Chart(ctxMain, {
+        type: 'bar',
+        data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
         datasets: [{
-          data: [value, 100 - value],
-          backgroundColor: [gradient, '#e5e7eb'],
-          borderWidth: 0
+            label: 'Revenue',
+            data: [12, 19, 14, 20, 16],
+            backgroundColor: 'rgba(99, 102, 241, 0.8)',
+            borderRadius: 10
         }]
-      },
-      options: {
-        cutout: '75%',
-        plugins: { legend: { display: false }, tooltip: { enabled: false } }
-      }
+        },
+        options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' } },
+            x: { ticks: { color: '#6b7280' } }
+        }
+        }
     });
-  };
-
-  createDoughnutChart('chartProperties', 80, '#3b82f6', '#8b5cf6');
-  createDoughnutChart('chartRent', 90, '#22c55e', '#3b82f6');
-  createDoughnutChart('chartTenants', 75, '#f97316', '#ec4899');
-  createDoughnutChart('chartMaintenance', 65, '#334155', '#1e293b');
-
-  // Main Chart (example bar)
-  const ctxMain = document.getElementById('mainChart').getContext('2d');
-  new Chart(ctxMain, {
-    type: 'bar',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-      datasets: [{
-        label: 'Revenue',
-        data: [12, 19, 14, 20, 16],
-        backgroundColor: 'rgba(99, 102, 241, 0.8)',
-        borderRadius: 10
-      }]
-    },
-    options: {
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { beginAtZero: true, ticks: { color: '#6b7280' } },
-        x: { ticks: { color: '#6b7280' } }
-      }
-    }
-  });
-</script>
+    </script>
 
 
   </body>
