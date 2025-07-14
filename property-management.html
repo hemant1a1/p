@@ -290,12 +290,17 @@
                 <p class="text-base font-medium">View Properties</p>
                 <div class="flex border rounded overflow-hidden">
                     <button @click="view = 'grid'"
-                            :class="view === 'grid' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600'"
-                            class="px-3 py-1 text-sm font-medium transition">Grid</button>
+                        :class="view === 'grid' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600'"
+                        class="px-3 py-1 transition">
+                        <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    </button>
                     <button @click="view = 'list'"
-                            :class="view === 'list' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600'"
-                            class="px-3 py-1 text-sm font-medium transition">List</button>
+                        :class="view === 'list' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600'"
+                        class="px-3 py-1 transition">
+                        <i data-lucide="list" class="w-4 h-4"></i>
+                    </button>
                 </div>
+
             </div>
 
             <div x-show="view === 'grid'" x-transition>
