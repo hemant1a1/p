@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#f5f7fa] font-sans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PropertyFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          },
+        },
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      body {
+        background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body class="flex h-screen overflow-hidden text-gray-900">
+    <!-- Sidebar -->
+    <aside class="w-64 min-w-[16rem] hidden md:flex flex-col justify-between bg-white/30 backdrop-blur-xl shadow-sm border-r border-white/40">
+      <div>
+        <div class="p-6 text-xl font-bold text-indigo-600 flex items-center gap-3">
+          <i data-lucide="building" class="w-6 h-6 text-indigo-500"></i>
+          PropertyFlow
+        </div>
+        <nav class="mt-4 space-y-2 px-4 text-sm">
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="layout-dashboard" class="w-5 h-5 text-indigo-500"></i> Dashboard
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="home" class="w-5 h-5 text-indigo-500"></i> Properties
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="users" class="w-5 h-5 text-indigo-500"></i> Tenants
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="file-text" class="w-5 h-5 text-indigo-500"></i> Accounting
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="wrench" class="w-5 h-5 text-indigo-500"></i> Maintenance
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="bar-chart-2" class="w-5 h-5 text-indigo-500"></i> Analytics
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="message-square" class="w-5 h-5 text-indigo-500"></i> Community
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
+            <i data-lucide="bot" class="w-5 h-5 text-indigo-500"></i> AI Assistant
+          </a>
+        </nav>
+      </div>
+      <div class="p-4">
+        <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-xl shadow-sm backdrop-blur transition-all">
+          + Add Property
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto relative">
+      <!-- Header -->
+      <header class="sticky top-0 z-40 w-full bg-gradient-to-r from-indigo-400 via-blue-500 to-purple-500 shadow-[0_1px_0_#0000000d] backdrop-blur-xl shadow-sm">
+        <div class="w-full bg-white/90 backdrop-blur-xl px-6 py-4 flex justify-between items-center">
+            <input
+            type="text"
+            placeholder="Search properties, tenants..."
+            class="w-full max-w-md p-3 bg-white/40 backdrop-blur-md rounded-xl text-sm placeholder:text-gray-500 border border-white/50 shadow-inner focus:ring-2 focus:ring-indigo-300 transition"
+            />
+            <div class="flex items-center gap-4 ml-6">
+            <i data-lucide="bell" class="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-500 transition"></i>
+            <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg font-semibold">
+                HS
+            </div>
+            </div>
+        </div>
+      </header>
+
+      <!-- Content Body -->
+      <div class="p-6 pb-20">
+        <!-- Portfolio Overview -->
+        <div class="relative w-full rounded-2xl overflow-hidden text-white bg-gradient-to-tr from-indigo-600 via-purple-700 to-blue-500 shadow-lg mb-10">
+            <!-- Decorative SVG Waves (Full Width Layer) -->
+            <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#6EE7B7" fill-opacity="0.15"
+                d="M0,160L80,154.7C160,149,320,139,480,149.3C640,160,800,192,960,186.7C1120,181,1280,139,1360,117.3L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+                </path>
+                <path fill="#6366F1" fill-opacity="0.25"
+                d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,229.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+                </path>
+            </svg>
+
+            <!-- Content Layer -->
+            <div class="relative z-10 h-full w-full px-6 md:px-12 py-8 flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
+                <div class="w-8 h-8 bg-white rounded-full shadow-inner opacity-90"></div>
+                </div>
+
+                <p class="text-lg mt-2">
+                Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
+                </p>
+
+                <div class="flex flex-wrap gap-3 mt-4">
+                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
+                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Card 1 -->
+        <div class="relative bg-gradient-to-tr from-white/60 to-indigo-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
+            <div class="flex items-start justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Total Properties</p>
+                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-yellow-500 mt-1">12</h3>
+            </div>
+            <div class="relative p-3 rounded-2xl bg-indigo-100 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
+                <i data-lucide="building" class="w-6 h-6 text-indigo-600"></i>
+                <div class="absolute -inset-1 blur-xl bg-indigo-300/40 opacity-60 rounded-full z-[-1]"></div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="relative bg-gradient-to-tr from-white/60 to-green-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
+            <div class="flex items-start justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Rent Collected</p>
+                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-600 mt-1">90%</h3>
+            </div>
+            <div class="relative p-3 rounded-2xl bg-green-100 group-hover:-rotate-6 transition-transform duration-300 shadow-lg">
+                <i data-lucide="dollar-sign" class="w-6 h-6 text-green-600"></i>
+                <div class="absolute -inset-1 blur-xl bg-green-300/40 opacity-60 rounded-full z-[-1]"></div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="relative bg-gradient-to-tr from-white/60 to-purple-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
+            <div class="flex items-start justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Total Tenants</p>
+                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 mt-1">45</h3>
+            </div>
+            <div class="relative p-3 rounded-2xl bg-purple-100 group-hover:rotate-12 transition-transform duration-300 shadow-lg">
+                <i data-lucide="users" class="w-6 h-6 text-purple-600"></i>
+                <div class="absolute -inset-1 blur-xl bg-purple-300/40 opacity-60 rounded-full z-[-1]"></div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="relative bg-gradient-to-tr from-white/60 to-red-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
+            <div class="flex items-start justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Maintenance Requests</p>
+                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 mt-1">5</h3>
+            </div>
+            <div class="relative p-3 rounded-2xl bg-red-100 group-hover:-rotate-12 transition-transform duration-300 shadow-lg">
+                <i data-lucide="wrench" class="w-6 h-6 text-red-600"></i>
+                <div class="absolute -inset-1 blur-xl bg-red-300/40 opacity-60 rounded-full z-[-1]"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+
+        <!-- Quick Actions -->
+        <div class="mt-12">
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">Quick Actions</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
+              <i data-lucide="bar-chart" class="w-6 h-6 mb-2 text-indigo-500"></i>
+              <span class="text-sm font-medium truncate max-w-[120px]">View Analytics</span>
+            </button>
+            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
+              <i data-lucide="bot" class="w-6 h-6 mb-2 text-indigo-500"></i>
+              <span class="text-sm font-medium truncate max-w-[120px]">AI Assistant</span>
+            </button>
+            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
+              <i data-lucide="users" class="w-6 h-6 mb-2 text-green-600"></i>
+              <span class="text-sm font-medium truncate max-w-[120px]">Manage Tenants</span>
+            </button>
+            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
+              <i data-lucide="calendar" class="w-6 h-6 mb-2 text-yellow-600"></i>
+              <span class="text-sm font-medium truncate max-w-[120px]">Schedule Tour</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent Payments & Urgent Items -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          <!-- Payments -->
+          <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl ring-1 ring-white/10 shadow-sm">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
+              <i data-lucide="credit-card" class="w-5 h-5 text-green-500"></i>
+              Recent Payments
+            </h3>
+            <ul class="space-y-5 text-sm">
+              <li class="flex justify-between items-center">
+                <div>
+                  <p class="font-medium text-gray-900">Sarah Johnson</p>
+                  <p class="text-gray-500 text-xs">Unit 3A – Nov 1st</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-green-600 font-semibold">$1,200</p>
+                  <span class="text-xs text-green-500">Paid</span>
+                </div>
+              </li>
+              <li class="flex justify-between items-center">
+                <div>
+                  <p class="font-medium text-gray-900">Miko Chen</p>
+                  <p class="text-gray-500 text-xs">Unit 2B – Nov 1st</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-green-600 font-semibold">$1,400</p>
+                  <span class="text-xs text-green-500">Paid</span>
+                </div>
+              </li>
+              <li class="flex justify-between items-center">
+                <div>
+                  <p class="font-medium text-gray-900">Emily Davis</p>
+                  <p class="text-gray-500 text-xs">Unit 1C – Oct 30th</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-green-600 font-semibold">$1,100</p>
+                  <span class="text-xs text-green-500">Paid</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Urgent Items -->
+          <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl ring-1 ring-white/10 shadow-sm">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
+              <i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>
+              Urgent Items
+            </h3>
+            <ul class="space-y-5 text-sm">
+              <li class="flex justify-between items-center">
+                <div>
+                  <p class="font-medium text-gray-900">Water Heater Issue</p>
+                  <p class="text-gray-500 text-xs">Maintenance – Maple Heights</p>
+                </div>
+                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <div>
+                  <p class="font-medium text-gray-900">Overdue Rent</p>
+                  <p class="text-gray-500 text-xs">Payment – Oak Plaza</p>
+                </div>
+                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <div>
+                  <p class="font-medium text-gray-900">Annual Safety Check</p>
+                  <p class="text-gray-500 text-xs">Inspection – Pine Court</p>
+                </div>
+                <span class="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Medium</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Add Button -->
+      <div class="fixed bottom-6 right-6 z-50 md:hidden">
+        <button class="bg-indigo-600 hover:bg-indigo-700 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-xl">
+          +
+        </button>
+      </div>
+    </main>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
