@@ -19,7 +19,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
       body {
-        background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+        background: linear-gradient(to bottom right, #fafaff, #f2f2fb);
       }
       ::-webkit-scrollbar {
         width: 8px;
@@ -31,7 +31,7 @@
     </style>
   </head>
 
-  <body class="flex h-screen overflow-hidden text-gray-900"  x-data="{ open: false }">
+  <body class="flex h-screen overflow-hidden text-gray-600"  x-data="{ open: false }">
     
     <!-- Backdrop -->
     <div
@@ -295,102 +295,155 @@
         </div>
 
 
-        <!-- Quick Actions -->
-        <div class="mt-12">
-          <h3 class="text-xl font-semibold mb-4 text-gray-800">Quick Actions</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
-              <i data-lucide="bar-chart" class="w-6 h-6 mb-2 text-indigo-500"></i>
-              <span class="text-sm font-medium truncate max-w-[120px]">View Analytics</span>
+       <!-- Quick Actions -->
+        <div class="mt-8 relative">
+        <h3 class="text-xl font-semibold mb-6 text-gray-800">Quick Actions</h3>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 relative z-10">
+            <!-- Button -->
+            <button class="group relative overflow-hidden flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-white/70 shadow-sm backdrop-blur-sm backdrop-saturate-150 ring-1 ring-gray-200 border border-gray-100 transition-all duration-300 hover:scale-[1.03] backdrop-shadow">
+            <!-- Accent Shape -->
+            <div class="absolute -top-3 -right-3 w-20 h-20 bg-indigo-300/20 rounded-full blur-xl"></div>
+
+            <!-- Icon -->
+            <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 text-white z-10">
+                <i data-lucide="bar-chart" class="w-5 h-5"></i>
+            </div>
+
+            <!-- Label -->
+            <span class="text-sm font-medium text-gray-800 z-10">View Analytics</span>
             </button>
-            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
-              <i data-lucide="bot" class="w-6 h-6 mb-2 text-indigo-500"></i>
-              <span class="text-sm font-medium truncate max-w-[120px]">AI Assistant</span>
+
+            <!-- AI Assistant -->
+            <button class="group relative overflow-hidden flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-white/70 shadow-sm backdrop-blur-sm backdrop-saturate-150 ring-1 ring-gray-200 border border-gray-100 transition-all duration-300 hover:scale-[1.03] backdrop-shadow">
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-pink-300/20 rounded-full blur-xl"></div>
+            <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white z-10">
+                <i data-lucide="bot" class="w-5 h-5"></i>
+            </div>
+            <span class="text-sm font-medium text-gray-800 z-10">AI Assistant</span>
             </button>
-            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
-              <i data-lucide="users" class="w-6 h-6 mb-2 text-green-600"></i>
-              <span class="text-sm font-medium truncate max-w-[120px]">Manage Tenants</span>
+
+            <!-- Tenants -->
+            <button class="group relative overflow-hidden flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-white/70 shadow-sm backdrop-blur-sm backdrop-saturate-150 ring-1 ring-gray-200 border border-gray-100 transition-all duration-300 hover:scale-[1.03] backdrop-shadow">
+            <div class="absolute -top-2 left-1 w-20 h-20 bg-emerald-300/20 rounded-full blur-xl"></div>
+            <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-400 text-white z-10">
+                <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+            <span class="text-sm font-medium text-gray-800 z-10">Manage Tenants</span>
             </button>
-            <button class="rounded-2xl p-6 bg-white/70 backdrop-blur-md ring-1 ring-white/10 hover:bg-white/80 transition flex flex-col items-center text-gray-800 shadow-sm">
-              <i data-lucide="calendar" class="w-6 h-6 mb-2 text-yellow-600"></i>
-              <span class="text-sm font-medium truncate max-w-[120px]">Schedule Tour</span>
+
+            <!-- Schedule Tour -->
+            <button class="group relative overflow-hidden flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-white/70 shadow-sm backdrop-blur-sm backdrop-saturate-150 ring-1 ring-gray-200 border border-gray-100 transition-all duration-300 hover:scale-[1.03] backdrop-shadow">
+            <div class="absolute -bottom-2 right-1 w-20 h-20 bg-yellow-300/20 rounded-full blur-xl"></div>
+            <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 text-white z-10">
+                <i data-lucide="calendar" class="w-5 h-5"></i>
+            </div>
+            <span class="text-sm font-medium text-gray-800 z-10">Schedule Tour</span>
             </button>
-          </div>
         </div>
+        </div>
+
+
+
 
         <!-- Recent Payments & Urgent Items -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-          <!-- Payments -->
-          <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl ring-1 ring-white/10 shadow-sm">
-            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
-              <i data-lucide="credit-card" class="w-5 h-5 text-green-500"></i>
-              Recent Payments
-            </h3>
-            <ul class="space-y-5 text-sm">
-              <li class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-gray-900">Sarah Johnson</p>
-                  <p class="text-gray-500 text-xs">Unit 3A – Nov 1st</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-green-600 font-semibold">$1,200</p>
-                  <span class="text-xs text-green-500">Paid</span>
-                </div>
-              </li>
-              <li class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-gray-900">Miko Chen</p>
-                  <p class="text-gray-500 text-xs">Unit 2B – Nov 1st</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-green-600 font-semibold">$1,400</p>
-                  <span class="text-xs text-green-500">Paid</span>
-                </div>
-              </li>
-              <li class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-gray-900">Emily Davis</p>
-                  <p class="text-gray-500 text-xs">Unit 1C – Oct 30th</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-green-600 font-semibold">$1,100</p>
-                  <span class="text-xs text-green-500">Paid</span>
-                </div>
-              </li>
-            </ul>
-          </div>
 
-          <!-- Urgent Items -->
-          <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl ring-1 ring-white/10 shadow-sm">
-            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
-              <i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>
-              Urgent Items
+        <!-- Recent Payments -->
+        <div class="bg-white/60 backdrop-blur-lg rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="px-6 pt-5 pb-3 border-b border-gray-200 bg-gradient-to-r from-white/40 to-white/20 backdrop-blur">
+            <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <i data-lucide="credit-card" class="w-5 h-5 text-green-500"></i>
+                Recent Payments
             </h3>
-            <ul class="space-y-5 text-sm">
-              <li class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-gray-900">Water Heater Issue</p>
-                  <p class="text-gray-500 text-xs">Maintenance – Maple Heights</p>
-                </div>
-                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-gray-900">Overdue Rent</p>
-                  <p class="text-gray-500 text-xs">Payment – Oak Plaza</p>
-                </div>
-                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-gray-900">Annual Safety Check</p>
-                  <p class="text-gray-500 text-xs">Inspection – Pine Court</p>
-                </div>
-                <span class="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Medium</span>
-              </li>
-            </ul>
-          </div>
+            </div>
+            <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left text-gray-700">
+                <thead class="bg-indigo-600/10 text-indigo-600 uppercase text-xs border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-2 font-semibold">Tenant</th>
+                    <th class="px-6 py-2 font-semibold">Unit / Date</th>
+                    <th class="px-6 py-2 ont-semibold text-right">Amount</th>
+                    <th class="px-6 py-2 font-semibold text-right">Status</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Sarah Johnson</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Unit 3A – Nov 1st</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-right text-green-600 font-semibold">$1,200</td>
+                    <td class="px-6 py-3 text-right">
+                    <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Miko Chen</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Unit 2B – Nov 1st</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-right text-green-600 font-semibold">$1,400</td>
+                    <td class="px-6 py-3 text-right">
+                    <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Emily Davis</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Unit 1C – Oct 30th</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-right text-green-600 font-semibold">$1,100</td>
+                    <td class="px-6 py-3 text-right">
+                    <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full">Paid</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
         </div>
+
+        <!-- Urgent Items -->
+        <div class="bg-white/60 backdrop-blur-lg rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="px-6 pt-5 pb-3 border-b border-gray-200 bg-gradient-to-r from-white/40 to-white/20 backdrop-blur">
+            <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>
+                Urgent Items
+            </h3>
+            </div>
+            <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left text-gray-700">
+                <thead class="bg-indigo-600/10 text-indigo-600 uppercase text-xs border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-2 font-semibold">Issue</th>
+                    <th class="px-6 py-2 font-semibold">Location</th>
+                    <th class="px-6 py-2 font-semibold text-right">Priority</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Water Heater</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Maple Heights</td>
+                    <td class="px-6 py-3 text-right">
+                    <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Overdue Rent</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Oak Plaza</td>
+                    <td class="px-6 py-3 text-right">
+                    <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-600 rounded-full">High</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-3 border-r border-gray-100 font-semibold text-gray-900">Safety Check</td>
+                    <td class="px-6 py-3 border-r border-gray-100 text-gray-500">Pine Court</td>
+                    <td class="px-6 py-3 text-right">
+                    <span class="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">Medium</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+
+
+
       </div>
 
       <!-- Sticky Add Button -->
