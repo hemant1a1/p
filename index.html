@@ -137,35 +137,33 @@
                         d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,229.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L0,320Z" />
                     </svg>
 
-                    <!-- Content + Lottie -->
-                    <div class="relative z-10 w-full px-6 md:px-12 py-8 lg:py-0 flex flex-col lg:flex-row items-center justify-between">
+                    <!-- Content -->
+                    <div class="relative z-10 w-full px-6 md:px-12 py-8 flex flex-col justify-between">
                         <!-- Left Text Section -->
-                        <div class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
-                            </div>
-
-                            <p class="text-lg mt-2">
-                                Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
-                            </p>
-
-                            <div class="flex flex-wrap gap-3 mt-4">
-                                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
-                                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
-                            </div>
+                        <div class="flex justify-between items-start">
+                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
                         </div>
 
-                        <!-- Right Lottie Section -->
-                        <div class="hidden lg:flex justify-center items-center w-full lg:w-1/3 mt-6 lg:mt-0">
-                            <lottie-player 
-                                src="/house.json" 
-                                background="transparent" 
-                                speed="1" 
-                                style="width: 100%; max-width: 180px; height: 180px;" 
-                                loop 
-                                autoplay>
-                            </lottie-player>
+                        <p class="text-lg mt-2">
+                        Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
+                        </p>
+
+                        <div class="flex flex-wrap gap-3 mt-4">
+                        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
+                        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
                         </div>
+                    </div>
+
+                    <!-- Bottom Right Lottie Animation -->
+                    <div class="absolute -bottom-3 right-4 w-[140px] h-[140px] hidden lg:block z-0 pointer-events-none opacity-90">
+                        <lottie-player 
+                        src="/city-skyline.json" 
+                        background="transparent" 
+                        speed="1" 
+                        style="width: 100%; height: 100%;" 
+                        loop 
+                        autoplay>
+                        </lottie-player>
                     </div>
                     </div>
 
