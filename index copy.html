@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PropertyFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -30,9 +31,31 @@
     </style>
   </head>
 
-  <body class="flex h-screen overflow-hidden text-gray-900">
-    <!-- Sidebar -->
-    <aside class="w-64 min-w-[16rem] hidden md:flex flex-col justify-between bg-white/30 backdrop-blur-xl shadow-sm border-r border-white/40">
+  <body class="flex h-screen overflow-hidden text-gray-900"  x-data="{ open: false }">
+    
+    <!-- Backdrop -->
+    <div
+    class="fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 md:hidden"
+    x-show="open"
+    x-transition.opacity
+    @click="open = false"
+    x-cloak
+    ></div>
+
+    <!-- Sidebar / Drawer -->
+    <aside
+      class="fixed top-0 right-0 h-full w-64 bg-white z-50 transform transition-transform duration-300 md:static md:translate-x-0 md:flex md:flex-col md:justify-between shadow-lg border-l border-white/40"
+      :class="{ 'translate-x-0': open, 'translate-x-full': !open }"
+      x-cloak
+    >
+      <!-- Close Button on Mobile -->
+      <div class="flex justify-between items-center p-4 md:hidden">
+        <span class="text-lg font-semibold text-indigo-600">Menu</span>
+        <button @click="open = false">
+          <i data-lucide="x" class="w-6 h-6 text-gray-700"></i>
+        </button>
+      </div>
+
       <div>
         <div class="p-6 text-xl font-bold text-indigo-600 flex items-center gap-3">
           <i data-lucide="building" class="w-6 h-6 text-indigo-500"></i>
@@ -83,10 +106,17 @@
             class="w-full max-w-md p-3 bg-white/40 backdrop-blur-md rounded-xl text-sm placeholder:text-gray-500 border border-white/50 shadow-inner focus:ring-2 focus:ring-indigo-300 transition"
             />
             <div class="flex items-center gap-4 ml-6">
-            <i data-lucide="bell" class="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-500 transition"></i>
-            <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg font-semibold">
-                HS
+                <i data-lucide="bell" class="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-500 transition"></i>
+                <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg font-semibold">
+                    HS
+                </div>
             </div>
+            
+            <!-- Mobile Drawer Toggle (No Fixed) -->
+            <div class="md:hidden ml-6">
+                <button @click="open = true" class="p-2 bg-white shadow rounded-full">
+                <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
+                </button>
             </div>
         </div>
       </header>
@@ -94,95 +124,134 @@
       <!-- Content Body -->
       <div class="p-6 pb-20">
         <!-- Portfolio Overview -->
-        <div class="relative w-full rounded-2xl overflow-hidden text-white bg-gradient-to-tr from-indigo-600 via-purple-700 to-blue-500 shadow-lg mb-10">
-            <!-- Decorative SVG Waves (Full Width Layer) -->
-            <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#6EE7B7" fill-opacity="0.15"
-                d="M0,160L80,154.7C160,149,320,139,480,149.3C640,160,800,192,960,186.7C1120,181,1280,139,1360,117.3L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
-                </path>
-                <path fill="#6366F1" fill-opacity="0.25"
-                d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,229.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
-                </path>
-            </svg>
+        <div class="flex flex-col lg:flex-row gap-y-8 lg:gap-x-8 mt-10">
+            <!-- Left Section: Overview + Stat Boxes -->
+            <div class="w-full lg:w-8/12">
+                <!-- Portfolio Overview -->
+                <div class="relative w-full rounded-2xl overflow-hidden text-white bg-gradient-to-tr from-indigo-600 via-purple-700 to-blue-500 shadow-lg">
+                    <!-- Decorative SVG Waves -->
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#6EE7B7" fill-opacity="0.15" d="M0,160L80,154.7C160,149,320,139,480,149.3C640,160,800,192,960,186.7C1120,181,1280,139,1360,117.3L1440,96L1440,320L0,320Z"/>
+                        <path fill="#6366F1" fill-opacity="0.25" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,229.3C1120,235,1280,213,1360,202.7L1440,192L1440,320L0,320Z"/>
+                    </svg>
 
-            <!-- Content Layer -->
-            <div class="relative z-10 h-full w-full px-6 md:px-12 py-8 flex flex-col justify-between">
-                <div class="flex justify-between items-start">
-                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
-                <div class="w-8 h-8 bg-white rounded-full shadow-inner opacity-90"></div>
+                    <!-- Content -->
+                    <div class="relative z-10 h-full w-full px-6 md:px-12 py-8 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Portfolio Overview</h2>
+                        <div class="w-8 h-8 bg-white rounded-full shadow-inner opacity-90"></div>
+                        </div>
+
+                        <p class="text-lg mt-2">
+                        Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
+                        </p>
+
+                        <div class="flex flex-wrap gap-3 mt-4">
+                        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
+                        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
+                        </div>
+                    </div>
                 </div>
 
-                <p class="text-lg mt-2">
-                Managing <span class="text-white/90 font-bold">12 properties</span> with <span class="text-white/90 font-bold">45 tenants</span>
-                </p>
+                <!-- Quick Summary -->
+                <div class="mt-4">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Quick Summary</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-5">
+                    <!-- Total Properties -->
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Total Properties</p>
+                        <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mt-1">12</h3>
+                    </div>
+                    <div class="w-16 h-16">
+                        <canvas id="chartProperties"></canvas>
+                    </div>
+                    </div>
 
-                <div class="flex flex-wrap gap-3 mt-4">
-                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">96% Occupancy</span>
-                <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">$54.6K Revenue</span>
+                    <!-- Rent Collected -->
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Rent Collected</p>
+                        <h3 class="text-3xl font-extrabold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mt-1">90%</h3>
+                    </div>
+                    <div class="w-16 h-16">
+                        <canvas id="chartRent"></canvas>
+                    </div>
+                    </div>
+
+                    <!-- Total Tenants -->
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Total Tenants</p>
+                        <h3 class="text-3xl font-extrabold bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent mt-1">45</h3>
+                    </div>
+                    <div class="w-16 h-16">
+                        <canvas id="chartTenants"></canvas>
+                    </div>
+                    </div>
+
+                    <!-- Maintenance Requests -->
+                    <div class="flex items-center justify-between bg-white shadow-sm rounded-2xl px-6 py-5 hover:shadow-xl">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Maintenance Requests</p>
+                        <h3 class="text-3xl font-extrabold bg-gradient-to-r from-slate-600 to-gray-800 bg-clip-text text-transparent mt-1">5</h3>
+                    </div>
+                    <div class="w-16 h-16">
+                        <canvas id="chartMaintenance"></canvas>
+                    </div>
+                    </div>
+                </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Right Section: Chart + Maintenance List (Compact Version) -->
+            <div class="w-full lg:w-4/12 flex flex-col gap-5">
+                <!-- Revenue Trend Chart Card -->
+                <div class="bg-white rounded-xl shadow-sm p-4">
+                    <h3 class="text-base font-semibold text-gray-700 mb-3">Revenue Trend</h3>
+                    <canvas id="mainChart" class="w-full h-64"></canvas>
+                </div>
+
+                <!-- Maintenance Requests Card -->
+                <div class="bg-white rounded-xl shadow-sm p-4">
+                    <h3 class="text-base font-semibold text-gray-700 mb-3">Recent Maintenance</h3>
+                    <ul class="space-y-4">
+                        <!-- Request Item -->
+                        <li class="flex items-start gap-3">
+                            <img src="https://i.pravatar.cc/40?img=1" alt="Tenant" class="w-9 h-9 rounded-full" />
+                            <div class="text-sm">
+                            <p class="font-semibold text-gray-800 leading-tight">
+                                Aman Singh <span class="text-xs text-gray-400 ml-1">Jul 14, 10:30 AM</span>
+                            </p>
+                            <p class="text-gray-500 text-xs mt-0.5">Leaking tap in kitchen sink.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3">
+                            <img src="https://i.pravatar.cc/40?img=2" alt="Tenant" class="w-9 h-9 rounded-full" />
+                            <div class="text-sm">
+                            <p class="font-semibold text-gray-800 leading-tight">
+                                Ritika Sharma <span class="text-xs text-gray-400 ml-1">Jul 13, 5:20 PM</span>
+                            </p>
+                            <p class="text-gray-500 text-xs mt-0.5">AC not cooling in bedroom.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3">
+                            <img src="https://i.pravatar.cc/40?img=3" alt="Tenant" class="w-9 h-9 rounded-full" />
+                            <div class="text-sm">
+                            <p class="font-semibold text-gray-800 leading-tight">
+                                Kunal Mehta <span class="text-xs text-gray-400 ml-1">Jul 12, 3:45 PM</span>
+                            </p>
+                            <p class="text-gray-500 text-xs mt-0.5">Lights flickering in hallway.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
 
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Card 1 -->
-        <div class="relative bg-gradient-to-tr from-white/60 to-indigo-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
-            <div class="flex items-start justify-between">
-            <div>
-                <p class="text-sm text-gray-600">Total Properties</p>
-                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-yellow-500 mt-1">12</h3>
-            </div>
-            <div class="relative p-3 rounded-2xl bg-indigo-100 group-hover:rotate-6 transition-transform duration-300 shadow-lg">
-                <i data-lucide="building" class="w-6 h-6 text-indigo-600"></i>
-                <div class="absolute -inset-1 blur-xl bg-indigo-300/40 opacity-60 rounded-full z-[-1]"></div>
-            </div>
-            </div>
         </div>
-
-        <!-- Card 2 -->
-        <div class="relative bg-gradient-to-tr from-white/60 to-green-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
-            <div class="flex items-start justify-between">
-            <div>
-                <p class="text-sm text-gray-600">Rent Collected</p>
-                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-600 mt-1">90%</h3>
-            </div>
-            <div class="relative p-3 rounded-2xl bg-green-100 group-hover:-rotate-6 transition-transform duration-300 shadow-lg">
-                <i data-lucide="dollar-sign" class="w-6 h-6 text-green-600"></i>
-                <div class="absolute -inset-1 blur-xl bg-green-300/40 opacity-60 rounded-full z-[-1]"></div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="relative bg-gradient-to-tr from-white/60 to-purple-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
-            <div class="flex items-start justify-between">
-            <div>
-                <p class="text-sm text-gray-600">Total Tenants</p>
-                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 mt-1">45</h3>
-            </div>
-            <div class="relative p-3 rounded-2xl bg-purple-100 group-hover:rotate-12 transition-transform duration-300 shadow-lg">
-                <i data-lucide="users" class="w-6 h-6 text-purple-600"></i>
-                <div class="absolute -inset-1 blur-xl bg-purple-300/40 opacity-60 rounded-full z-[-1]"></div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="relative bg-gradient-to-tr from-white/60 to-red-100/30 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group overflow-hidden">
-            <div class="flex items-start justify-between">
-            <div>
-                <p class="text-sm text-gray-600">Maintenance Requests</p>
-                <h3 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 mt-1">5</h3>
-            </div>
-            <div class="relative p-3 rounded-2xl bg-red-100 group-hover:-rotate-12 transition-transform duration-300 shadow-lg">
-                <i data-lucide="wrench" class="w-6 h-6 text-red-600"></i>
-                <div class="absolute -inset-1 blur-xl bg-red-300/40 opacity-60 rounded-full z-[-1]"></div>
-            </div>
-            </div>
-        </div>
-        </div>
-
 
 
         <!-- Quick Actions -->
@@ -284,7 +353,7 @@
       </div>
 
       <!-- Sticky Add Button -->
-      <div class="fixed bottom-6 right-6 z-50 md:hidden">
+      <div class="fixed bottom-6 left-6 z-50 md:hidden">
         <button class="bg-indigo-600 hover:bg-indigo-700 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-xl">
           +
         </button>
@@ -294,5 +363,59 @@
     <script>
       lucide.createIcons();
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const createDoughnutChart = (id, value, fromColor, toColor) => {
+    const ctx = document.getElementById(id).getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+    gradient.addColorStop(0, fromColor);
+    gradient.addColorStop(1, toColor);
+
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [value, 100 - value],
+          backgroundColor: [gradient, '#e5e7eb'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '75%',
+        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+      }
+    });
+  };
+
+  createDoughnutChart('chartProperties', 80, '#3b82f6', '#8b5cf6');
+  createDoughnutChart('chartRent', 90, '#22c55e', '#3b82f6');
+  createDoughnutChart('chartTenants', 75, '#f97316', '#ec4899');
+  createDoughnutChart('chartMaintenance', 65, '#334155', '#1e293b');
+
+  // Main Chart (example bar)
+  const ctxMain = document.getElementById('mainChart').getContext('2d');
+  new Chart(ctxMain, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      datasets: [{
+        label: 'Revenue',
+        data: [12, 19, 14, 20, 16],
+        backgroundColor: 'rgba(99, 102, 241, 0.8)',
+        borderRadius: 10
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { color: '#6b7280' } },
+        x: { ticks: { color: '#6b7280' } }
+      }
+    }
+  });
+</script>
+
+
   </body>
 </html>
