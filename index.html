@@ -17,6 +17,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/lucide@latest"></script>
+   
     <style>
       body {
         background: linear-gradient(to bottom right, #fafaff, #f2f2fb);
@@ -28,6 +29,34 @@
         background: rgba(0, 0, 0, 0.15);
         border-radius: 10px;
       }
+
+      .sidebar-nav .nav-link {
+            position: relative;
+        }
+
+        .sidebar-nav .nav-link::before {
+            content: "";
+            height: 76%;
+            width: 0;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #5046e3;
+            border-radius: 0 0.75rem 0.75rem 0;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar-nav .nav-link:hover::before,
+        .sidebar-nav .nav-link.active::before {
+            width: 6px;
+        }
+
+        .sidebar-nav .nav-link:hover,
+        .sidebar-nav .nav-link.active {
+            background: linear-gradient(to right, #e0e0e4 0%, rgba(125, 185, 232, 0) 100%);
+        }
+
     </style>
   </head>
 
@@ -57,42 +86,67 @@
       </div>
 
       <div>
-        <div class="p-6 text-xl font-bold text-indigo-600 flex items-center gap-3">
+        <div class="px-3 py-4 text-xl font-bold text-indigo-600 flex items-center gap-3">
           <i data-lucide="building" class="w-6 h-6 text-indigo-500"></i>
           PropertyFlow
         </div>
-        <nav class="mt-4 space-y-2 px-4 text-sm">
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="layout-dashboard" class="w-5 h-5 text-indigo-500"></i> Dashboard
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="home" class="w-5 h-5 text-indigo-500"></i> Properties
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="users" class="w-5 h-5 text-indigo-500"></i> Tenants
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="file-text" class="w-5 h-5 text-indigo-500"></i> Accounting
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="wrench" class="w-5 h-5 text-indigo-500"></i> Maintenance
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="bar-chart-2" class="w-5 h-5 text-indigo-500"></i> Analytics
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="message-square" class="w-5 h-5 text-indigo-500"></i> Community
-          </a>
-          <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/30 transition">
-            <i data-lucide="bot" class="w-5 h-5 text-indigo-500"></i> AI Assistant
-          </a>
+        <nav class="sidebar-nav mt-2 space-y-1 text-sm">
+            <a href="#" class="nav-link active flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 text-indigo-500"></i> Dashboard
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="home" class="w-5 h-5 text-indigo-500"></i> Properties
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="users" class="w-5 h-5 text-indigo-500"></i> Tenants
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="file-text" class="w-5 h-5 text-indigo-500"></i> Accounting
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="wrench" class="w-5 h-5 text-indigo-500"></i> Maintenance
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="bar-chart-2" class="w-5 h-5 text-indigo-500"></i> Analytics
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="message-square" class="w-5 h-5 text-indigo-500"></i> Community
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="bot" class="w-5 h-5 text-indigo-500"></i> AI Assistant
+            </a>
         </nav>
       </div>
-      <div class="p-4">
-        <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-xl shadow-sm backdrop-blur transition-all">
-          + Add Property
-        </button>
-      </div>
+
+      <div class="px-3 py-2">
+        <div class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-xl p-2 shadow-sm text-gray-800 flex flex-col items-center justify-center space-y-1">
+
+            <!-- Decorative SVG Layer -->
+            <svg class="absolute -top-4 -right-4 w-24 h-24 opacity-10" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="50" fill="white" />
+            </svg>
+
+            <!-- Lottie Animation -->
+            <div class="w-24 h-24">
+            <lottie-player
+                src="/home.json"
+                background="transparent"
+                speed="1"
+                loop
+                autoplay
+            ></lottie-player>
+            </div>
+
+            <p class="text-[10px] text-gray-600 text-center leading-tight mb-3">Quick listing of your property.</p>
+            <!-- Stylish Compact Button -->
+            <button class="relative z-10 text-center uppercase w-full px-3 py-1 mt-1 bg-indigo-500 text-white text-xs rounded-md shadow hover:bg-indigo-600 transition">
+            Add Property
+            </button>
+
+        </div>
+        </div>
+
+
     </aside>
 
     <!-- Main Content -->
