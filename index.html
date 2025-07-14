@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PropertyFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -30,9 +31,31 @@
     </style>
   </head>
 
-  <body class="flex h-screen overflow-hidden text-gray-900">
-    <!-- Sidebar -->
-    <aside class="w-64 min-w-[16rem] hidden md:flex flex-col justify-between bg-white/30 backdrop-blur-xl shadow-sm border-r border-white/40">
+  <body class="flex h-screen overflow-hidden text-gray-900"  x-data="{ open: false }">
+    
+    <!-- Backdrop -->
+    <div
+    class="fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 md:hidden"
+    x-show="open"
+    x-transition.opacity
+    @click="open = false"
+    x-cloak
+    ></div>
+
+    <!-- Sidebar / Drawer -->
+    <aside
+      class="fixed top-0 right-0 h-full w-64 bg-white z-50 transform transition-transform duration-300 md:static md:translate-x-0 md:flex md:flex-col md:justify-between shadow-lg border-l border-white/40"
+      :class="{ 'translate-x-0': open, 'translate-x-full': !open }"
+      x-cloak
+    >
+      <!-- Close Button on Mobile -->
+      <div class="flex justify-between items-center p-4 md:hidden">
+        <span class="text-lg font-semibold text-indigo-600">Menu</span>
+        <button @click="open = false">
+          <i data-lucide="x" class="w-6 h-6 text-gray-700"></i>
+        </button>
+      </div>
+
       <div>
         <div class="p-6 text-xl font-bold text-indigo-600 flex items-center gap-3">
           <i data-lucide="building" class="w-6 h-6 text-indigo-500"></i>
@@ -83,10 +106,17 @@
             class="w-full max-w-md p-3 bg-white/40 backdrop-blur-md rounded-xl text-sm placeholder:text-gray-500 border border-white/50 shadow-inner focus:ring-2 focus:ring-indigo-300 transition"
             />
             <div class="flex items-center gap-4 ml-6">
-            <i data-lucide="bell" class="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-500 transition"></i>
-            <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg font-semibold">
-                HS
+                <i data-lucide="bell" class="w-6 h-6 text-gray-500 cursor-pointer hover:text-indigo-500 transition"></i>
+                <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg font-semibold">
+                    HS
+                </div>
             </div>
+            
+            <!-- Mobile Drawer Toggle (No Fixed) -->
+            <div class="md:hidden ml-6">
+                <button @click="open = true" class="p-2 bg-white shadow rounded-full">
+                <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
+                </button>
             </div>
         </div>
       </header>
@@ -284,7 +314,7 @@
       </div>
 
       <!-- Sticky Add Button -->
-      <div class="fixed bottom-6 right-6 z-50 md:hidden">
+      <div class="fixed bottom-6 left-6 z-50 md:hidden">
         <button class="bg-indigo-600 hover:bg-indigo-700 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-xl">
           +
         </button>
