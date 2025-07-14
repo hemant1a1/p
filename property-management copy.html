@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#f5f7fa] font-sans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PropertyFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          },
+        },
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+   
+    <style>
+      body {
+        background: linear-gradient(to bottom right, #fafaff, #f2f2fb);
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+      }
+
+      .sidebar-nav .nav-link {
+            position: relative;
+        }
+
+        .sidebar-nav .nav-link::before {
+            content: "";
+            height: 76%;
+            width: 0;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #5046e3;
+            border-radius: 0 0.75rem 0.75rem 0;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar-nav .nav-link:hover::before,
+        .sidebar-nav .nav-link.active::before {
+            width: 6px;
+        }
+
+        .sidebar-nav .nav-link:hover,
+        .sidebar-nav .nav-link.active {
+            background: linear-gradient(to right, #e0e0e4 0%, rgba(125, 185, 232, 0) 100%);
+        }
+
+    </style>
+  </head>
+
+  <body class="flex h-screen overflow-hidden text-gray-600"  x-data="{ open: false }">
+    
+    <!-- Backdrop -->
+    <div
+    class="fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 md:hidden"
+    x-show="open"
+    x-transition.opacity
+    @click="open = false"
+    x-cloak
+    ></div>
+
+    <!-- Sidebar / Drawer -->
+    <aside
+      class="fixed top-0 right-0 h-full w-64 bg-white z-50 transform transition-transform duration-300 md:static md:translate-x-0 md:flex md:flex-col md:justify-between shadow-lg border-l border-white/40"
+      :class="{ 'translate-x-0': open, 'translate-x-full': !open }"
+      x-cloak
+    >
+      <!-- Close Button on Mobile -->
+      <div class="flex justify-between items-center p-4 md:hidden">
+        <span class="text-lg font-semibold text-indigo-600">Menu</span>
+        <button @click="open = false">
+          <i data-lucide="x" class="w-6 h-6 text-gray-700"></i>
+        </button>
+      </div>
+
+      <div>
+        <div class="px-3 py-4 text-xl font-bold text-indigo-600 flex items-center gap-3">
+          <i data-lucide="building" class="w-6 h-6 text-indigo-500"></i>
+          PropertyFlow
+        </div>
+        <nav class="sidebar-nav mt-2 space-y-1 text-sm">
+            <a href="#" class="nav-link active flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 text-indigo-500"></i> Dashboard
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="home" class="w-5 h-5 text-indigo-500"></i> Properties
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="users" class="w-5 h-5 text-indigo-500"></i> Tenants
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="file-text" class="w-5 h-5 text-indigo-500"></i> Accounting
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="wrench" class="w-5 h-5 text-indigo-500"></i> Maintenance
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="bar-chart-2" class="w-5 h-5 text-indigo-500"></i> Analytics
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="message-square" class="w-5 h-5 text-indigo-500"></i> Community
+            </a>
+            <a href="#" class="nav-link flex items-center gap-3 p-3 rounded-xl transition">
+                <i data-lucide="bot" class="w-5 h-5 text-indigo-500"></i> AI Assistant
+            </a>
+        </nav>
+      </div>
+
+        <div class="px-3 py-2">
+            <div class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-xl p-2 shadow-sm text-gray-800 flex flex-col items-center justify-center space-y-1">
+
+                <!-- Decorative SVG Layer -->
+                <svg class="absolute -top-4 -right-4 w-24 h-24 opacity-10" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="50" fill="white" />
+                </svg>
+
+                <!-- Lottie Animation -->
+                <div class="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
+                <lottie-player
+                    src="/home.json"
+                    background="transparent"
+                    speed="1"
+                    loop
+                    autoplay
+                ></lottie-player>
+                </div>
+
+                <p class="text-[10px] text-gray-600 text-center leading-tight mb-3">Quick listing of your property.</p>
+                <!-- Stylish Compact Button -->
+                <button class="relative z-10 text-center uppercase w-full px-3 py-1 mt-1 bg-indigo-500 text-white text-xs rounded-md shadow hover:bg-indigo-600 transition">
+                Add Property
+                </button>
+
+            </div>
+        </div>
+
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto relative">
+      <!-- Header -->
+      <header class="sticky top-0 z-40 w-full bg-gradient-to-r from-indigo-400 via-blue-500 to-purple-500 shadow-[0_1px_0_#0000000d] backdrop-blur-xl shadow-sm">
+        <div class="w-full bg-white/90 backdrop-blur-xl px-4 sm:px-6 py-3 flex flex-wrap sm:flex-nowrap justify-between items-center gap-4">
+
+            <!-- Search + AI Button -->
+            <div class="flex flex-1 items-center gap-3">
+            <!-- Stylish Search Bar -->
+            <div class="relative w-full max-w-md">
+                <input
+                type="text"
+                placeholder="Search properties, tenants..."
+                class="w-full pl-10 pr-20 py-2.5 text-sm rounded-xl bg-white/40 backdrop-blur-md border border-white/50 placeholder:text-gray-500 text-gray-800 shadow-inner focus:ring-2 focus:ring-indigo-300 transition"
+                />
+                <!-- Search Icon -->
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
+
+                <!-- AI Assistant Button -->
+                <button
+                class="absolute right-2 top-1/2 -translate-y-1/2 bg-indigo-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-indigo-600 shadow transition-all"
+                >
+                AI
+                </button>
+            </div>
+            </div>
+
+            <!-- Notification & Avatar -->
+            <div class="flex items-center gap-4">
+                <!-- Notification Icon with Background and Pulse -->
+                <div class="relative">
+                    <div class="w-10 h-10 bg-white/60 backdrop-blur-sm border border-white/50 rounded-xl flex items-center justify-center shadow-inner cursor-pointer hover:bg-white/70 transition">
+                        <i data-lucide="bell" class="w-5 h-5 text-indigo-600"></i>
+                    </div>
+
+                    <!-- Pulse Dot -->
+                    <span class="absolute top-0 right-0 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600 border-2 border-white"></span>
+                    </span>
+                </div>
+
+                <div class="w-10 h-10 bg-indigo-500 text-white rounded-xl flex items-center justify-center shadow-lg font-semibold">
+                    HS
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="md:hidden">
+                    <button @click="open = true" class="p-2 bg-white shadow rounded-xl">
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+      <!-- Content Body -->
+      <div class="p-6 pb-20">
+
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Property Management</h1>
+            <div class="flex gap-3">
+                <select class="px-3 py-2 border rounded-md bg-white text-sm">
+                <option>All Status</option>
+                </select>
+                <select class="px-3 py-2 border rounded-md bg-white text-sm">
+                <option>Sort by Name</option>
+                </select>
+                <button class="bg-[#5046e3] hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                + Add Property
+                </button>
+            </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+
+                <!-- Total Properties -->
+                <div class="relative bg-white rounded-xl border border-gray-100 shadow-sm backdrop-blur-sm backdrop-saturate-150 backdrop-shadow px-4 py-3 overflow-hidden group hover:shadow-md transition">
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-pink-300/20 rounded-full blur-xl"></div>
+                    <div class="flex justify-between items-center relative z-10">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Properties</p>
+                        <h3 class="text-xl font-bold text-gray-800">3</h3>
+                    </div>
+                    <div class="p-2 bg-pink-200 text-pink-600 rounded-full group-hover:scale-110 transition">
+                        <i data-lucide="building-2" class="w-5 h-5"></i>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Total Units -->
+                <div class="relative bg-white rounded-xl border border-gray-100 shadow-sm backdrop-blur-sm backdrop-saturate-150 backdrop-shadow px-4 py-3 overflow-hidden group hover:shadow-md transition">
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-green-300/20 rounded-full blur-xl"></div>
+                    <div class="flex justify-between items-center relative z-10">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Units</p>
+                        <h3 class="text-xl font-bold text-gray-800">26</h3>
+                    </div>
+                    <div class="p-2 bg-green-200 text-green-600 rounded-full group-hover:scale-110 transition">
+                        <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Occupancy Rate -->
+                <div class="relative bg-white rounded-xl border border-gray-100 shadow-sm backdrop-blur-sm backdrop-saturate-150 backdrop-shadow px-4 py-3 overflow-hidden group hover:shadow-md transition">
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-purple-300/40 rounded-full blur-xl"></div>
+                    <div class="flex justify-between items-center relative z-10">
+                    <div>
+                        <p class="text-sm text-gray-500">Occupancy Rate</p>
+                        <h3 class="text-xl font-bold text-gray-800">88%</h3>
+                    </div>
+                    <div class="p-2 bg-purple-200 text-purple-600 rounded-full group-hover:scale-110 transition">
+                        <i data-lucide="activity" class="w-5 h-5"></i>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Revenue -->
+                <div class="relative bg-white rounded-xl border border-gray-100 shadow-sm backdrop-blur-sm backdrop-saturate-150 backdrop-shadow px-4 py-3 overflow-hidden group hover:shadow-md transition">
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-300/20 rounded-full blur-xl"></div>
+                    <div class="flex justify-between items-center relative z-10">
+                    <div>
+                        <p class="text-sm text-gray-500">Monthly Revenue</p>
+                        <h3 class="text-xl font-bold text-gray-800">$34,800</h3>
+                    </div>
+                    <div class="p-2 bg-yellow-200 text-yellow-600 rounded-full group-hover:scale-110 transition">
+                        <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
+                <div class="relative rounded-xl overflow-hidden mx-3 my-3">
+                    <img src="/1.jpg" class="w-full h-44 object-cover rounded-xl transition group-hover:scale-105" />
+                     <div class="absolute top-2 left-2 bg-green-100/80 text-green-700 border border-green-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">Active</div>
+                </div>
+                <div class="px-3 pb-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-semibold text-lg text-gray-800">Maple Heights</h3>
+                        <div class="flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">4.5</span>
+                        </div>
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 123 Maple Street</p>
+                    <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                        <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-gray-100 rounded-md">
+                            <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i>
+                            </div>
+                            <span class="font-medium"><strong>8</strong> Units</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-gray-100 rounded-md">
+                            <i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i>
+                            </div>
+                            <span class="font-medium"><strong>7/8</strong> Occupied</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-green-100 rounded-md">
+                            <i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i>
+                            </div>
+                            <span class="font-medium text-green-700">$9,600</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-purple-100 rounded-md">
+                            <i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i>
+                            </div>
+                            <span class="font-medium">88% Rate</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
+                    <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
+                        <i data-lucide="eye" class="w-4 h-4"></i> View
+                    </button>
+                    <div class="flex items-center gap-2 text-gray-500">
+                        <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
+                        <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
+                        <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+                    </div>
+                </div>
+                <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                    <div class="flex items-center gap-2">
+                        <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                        <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
+                        <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                    </div>
+                    <span>Updated 2d ago</span>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
+                <div class="relative rounded-xl overflow-hidden mx-3 my-3">
+                    <img src="/2.jpg" class="w-full h-44 object-cover rounded-xl transition group-hover:scale-105" />
+                    <div class="absolute top-2 left-2 bg-green-100/80 text-green-700 border border-green-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">Active</div>
+                </div>
+                <div class="px-3 pb-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-semibold text-lg text-gray-800">Oak Plaza Complex</h3>
+                        <div class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">4.8</span>
+                        </div>
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 456 Oak Avenue</p>
+                    <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                        <div class="flex items-center gap-1.5">
+                        <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i></div>
+                        <span class="font-medium"><strong>12</strong> Units</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                        <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i></div>
+                        <span class="font-medium"><strong>11/12</strong> Occupied</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                        <div class="p-1 bg-green-100 rounded-md"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i></div>
+                        <span class="font-medium text-green-700">$16,800</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                        <div class="p-1 bg-purple-100 rounded-md"><i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i></div>
+                        <span class="font-medium">92% Rate</span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
+                    <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
+                        <i data-lucide="eye" class="w-4 h-4"></i> View
+                    </button>
+                    <div class="flex items-center gap-2 text-gray-500">
+                        <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
+                        <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
+                        <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+                    </div>
+                    </div>
+                    <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                    <div class="flex items-center gap-2">
+                        <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                        <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
+                        <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                    </div>
+                    <span>Updated 1d ago</span>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
+                <div class="relative rounded-xl overflow-hidden mx-3 my-3">
+                    <img src="/3.jpg" class="w-full h-44 object-cover rounded-xl transition group-hover:scale-105" />
+                    <div class="absolute top-2 left-2 bg-green-100/80 text-green-700 border border-green-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">Active</div>
+                </div>
+                <div class="px-3 pb-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-semibold text-lg text-gray-800">Pine Court Townhomes</h3>
+                    <div class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-700">4.2</span>
+                    </div>
+                </div>
+                <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 789 Pine Road</p>
+                <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                    <div class="flex items-center gap-1.5">
+                    <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i></div>
+                    <span class="font-medium"><strong>6</strong> Units</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                    <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i></div>
+                    <span class="font-medium"><strong>5/6</strong> Occupied</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                    <div class="p-1 bg-green-100 rounded-md"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i></div>
+                    <span class="font-medium text-green-700">$8,400</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                    <div class="p-1 bg-purple-100 rounded-md"><i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i></div>
+                    <span class="font-medium">83% Rate</span>
+                    </div>
+                </div>
+                </div>
+                <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
+                <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
+                    <i data-lucide="eye" class="w-4 h-4"></i> View
+                </button>
+                <div class="flex items-center gap-2 text-gray-500">
+                    <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
+                    <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
+                    <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+                </div>
+                </div>
+                <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                <div class="flex items-center gap-2">
+                    <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                    <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
+                    <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                </div>
+                <span>Updated 4d ago</span>
+                </div>
+            </div>
+
+           </div>
+
+
+      </div>
+
+     
+    </main>
+
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+
+  </body>
+</html>

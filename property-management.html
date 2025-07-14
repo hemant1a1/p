@@ -60,7 +60,7 @@
     </style>
   </head>
 
-  <body class="flex h-screen overflow-hidden text-gray-600"  x-data="{ open: false }">
+  <body class="flex h-screen overflow-hidden text-gray-600"  x-data="{ open: false, view: 'grid' }">
     
     <!-- Backdrop -->
     <div
@@ -218,6 +218,16 @@
                 <select class="px-3 py-2 border rounded-md bg-white text-sm">
                 <option>Sort by Name</option>
                 </select>
+
+                <div class="flex border rounded overflow-hidden">
+                    <button @click="view = 'grid'"
+                            :class="view === 'grid' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600'"
+                            class="px-3 py-1 text-sm font-medium transition">Grid</button>
+                    <button @click="view = 'list'"
+                            :class="view === 'list' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600'"
+                            class="px-3 py-1 text-sm font-medium transition">List</button>
+                </div>
+
                 <button class="bg-[#5046e3] hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
                 + Add Property
                 </button>
@@ -286,186 +296,286 @@
             </div>
 
 
+            <div x-show="view === 'grid'" x-transition>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
+                        <div class="relative rounded-xl overflow-hidden mx-3 my-3">
+                            <img src="/1.jpg" class="w-full h-44 object-cover rounded-xl transition group-hover:scale-105" />
+                            <div class="absolute top-2 left-2 bg-green-100/80 text-green-700 border border-green-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">Active</div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-semibold text-lg text-gray-800">Maple Heights</h3>
+                                <div class="flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700">4.5</span>
+                                </div>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 123 Maple Street</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                <div class="flex items-center gap-1.5">
+                                    <div class="p-1 bg-gray-100 rounded-md">
+                                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i>
+                                    </div>
+                                    <span class="font-medium"><strong>8</strong> Units</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="p-1 bg-gray-100 rounded-md">
+                                    <i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i>
+                                    </div>
+                                    <span class="font-medium"><strong>7/8</strong> Occupied</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="p-1 bg-green-100 rounded-md">
+                                    <i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i>
+                                    </div>
+                                    <span class="font-medium text-green-700">$9,600</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="p-1 bg-purple-100 rounded-md">
+                                    <i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i>
+                                    </div>
+                                    <span class="font-medium">88% Rate</span>
+                                </div>
+                            </div>
 
-           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
-                <div class="relative">
-                    <img src="/1.jpg" class="w-full h-44 object-cover transition group-hover:scale-105" />
-                    <div class="absolute top-2 left-2 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">Active</div>
-                </div>
-                <div class="p-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-semibold text-lg text-gray-800">Maple Heights</h3>
-                        <div class="flex items-center gap-1">
+                        </div>
+                        <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
+                            <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
+                                <i data-lucide="eye" class="w-4 h-4"></i> View
+                            </button>
+                            <div class="flex items-center gap-2 text-gray-500">
+                                <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
+                                <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
+                                <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+                            </div>
+                        </div>
+                        <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                            <div class="flex items-center gap-2">
+                                <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                                <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
+                                <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                            </div>
+                            <span>Updated 2d ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Property 2 -->
+                    <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
+                        <div class="relative rounded-xl overflow-hidden mx-3 my-3">
+                            <img src="/2.jpg" class="w-full h-44 object-cover rounded-xl transition group-hover:scale-105" />
+                            <div class="absolute top-2 left-2 bg-green-100/80 text-green-700 border border-green-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">Active</div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-semibold text-lg text-gray-800">Oak Plaza Complex</h3>
+                                <div class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
+                                </svg>
+                                <span class="text-sm font-medium text-gray-700">4.8</span>
+                                </div>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 456 Oak Avenue</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                <div class="flex items-center gap-1.5">
+                                <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i></div>
+                                <span class="font-medium"><strong>12</strong> Units</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i></div>
+                                <span class="font-medium"><strong>11/12</strong> Occupied</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                <div class="p-1 bg-green-100 rounded-md"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i></div>
+                                <span class="font-medium text-green-700">$16,800</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                <div class="p-1 bg-purple-100 rounded-md"><i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i></div>
+                                <span class="font-medium">92% Rate</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
+                            <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
+                                <i data-lucide="eye" class="w-4 h-4"></i> View
+                            </button>
+                            <div class="flex items-center gap-2 text-gray-500">
+                                <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
+                                <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
+                                <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+                            </div>
+                            </div>
+                            <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                            <div class="flex items-center gap-2">
+                                <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                                <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
+                                <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                            </div>
+                            <span>Updated 1d ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Property 3 -->
+                    <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
+                        <div class="relative rounded-xl overflow-hidden mx-3 my-3">
+                            <img src="/3.jpg" class="w-full h-44 object-cover rounded-xl transition group-hover:scale-105" />
+                            <div class="absolute top-2 left-2 bg-green-100/80 text-green-700 border border-green-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">Active</div>
+                        </div>
+                        <div class="px-3 pb-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg text-gray-800">Pine Court Townhomes</h3>
+                            <div class="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
+                                <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
                             </svg>
-                            <span class="text-sm font-medium text-gray-700">4.5</span>
-                        </div>
-                    </div>
-                    <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 123 Maple Street</p>
-                    <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
-                        <div class="flex items-center gap-1.5">
-                            <div class="p-1 bg-gray-100 rounded-md">
-                            <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i>
+                            <span class="text-sm font-medium text-gray-700">4.2</span>
                             </div>
-                            <span class="font-medium"><strong>8</strong> Units</span>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <div class="p-1 bg-gray-100 rounded-md">
-                            <i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i>
+                        <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 789 Pine Road</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                            <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i></div>
+                            <span class="font-medium"><strong>6</strong> Units</span>
                             </div>
-                            <span class="font-medium"><strong>7/8</strong> Occupied</span>
+                            <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i></div>
+                            <span class="font-medium"><strong>5/6</strong> Occupied</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-green-100 rounded-md"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i></div>
+                            <span class="font-medium text-green-700">$8,400</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                            <div class="p-1 bg-purple-100 rounded-md"><i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i></div>
+                            <span class="font-medium">83% Rate</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <div class="p-1 bg-green-100 rounded-md">
-                            <i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i>
-                            </div>
-                            <span class="font-medium text-green-700">$9,600</span>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <div class="p-1 bg-purple-100 rounded-md">
-                            <i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i>
-                            </div>
-                            <span class="font-medium">88% Rate</span>
+                        <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
+                        <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
+                            <i data-lucide="eye" class="w-4 h-4"></i> View
+                        </button>
+                        <div class="flex items-center gap-2 text-gray-500">
+                            <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
+                            <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
+                            <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+                        </div>
+                        </div>
+                        <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                        <div class="flex items-center gap-2">
+                            <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                            <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
+                            <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                        </div>
+                        <span>Updated 4d ago</span>
                         </div>
                     </div>
 
                 </div>
-                <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
-                    <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
-                        <i data-lucide="eye" class="w-4 h-4"></i> View
-                    </button>
-                    <div class="flex items-center gap-2 text-gray-500">
-                        <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
-                        <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
-                        <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
+            </div>
+
+            <!-- List View -->
+            <div x-show="view === 'list'" x-transition>
+            <div class="space-y-4">
+
+                <!-- Property 1: Maple Heights -->
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow transition flex gap-4 items-start">
+                <img src="/1.jpg" alt="Maple Heights" class="w-32 h-24 object-cover rounded-lg" />
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Maple Heights</h3>
+                        <p class="text-sm text-gray-500 flex items-center gap-1">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i> 123 Maple Street
+                        </p>
                     </div>
-                </div>
-                <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
+                    <span class="text-xs text-green-700 font-bold bg-green-100 border border-green-700 px-2 py-0.5 rounded-full">Active</span>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600 grid grid-cols-2 md:grid-cols-4 gap-3">
                     <div class="flex items-center gap-2">
-                        <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
-                        <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
-                        <button><i data-lucide="phone" class="w-4 h-4"></i></button>
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-indigo-500"></i> <span><strong>8</strong> Units</span>
                     </div>
-                    <span>Updated 2d ago</span>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="users" class="w-4 h-4 text-blue-500"></i> <span><strong>7/8</strong> Occupied</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="dollar-sign" class="w-4 h-4 text-green-600"></i> <span class="text-green-700">$9,600</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-purple-600"></i> <span>88% Rate</span>
+                    </div>
+                    </div>
                 </div>
+                </div>
+
+                <!-- Property 2: Oak Plaza Complex -->
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow transition flex gap-4 items-start">
+                <img src="/2.jpg" alt="Oak Plaza" class="w-32 h-24 object-cover rounded-lg" />
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Oak Plaza Complex</h3>
+                        <p class="text-sm text-gray-500 flex items-center gap-1">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i> 456 Oak Avenue
+                        </p>
+                    </div>
+                    <span class="text-xs text-green-700 font-bold bg-green-100 border border-green-700 px-2 py-0.5 rounded-full">Active</span>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600 grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-indigo-500"></i> <span><strong>12</strong> Units</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="users" class="w-4 h-4 text-blue-500"></i> <span><strong>11/12</strong> Occupied</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="dollar-sign" class="w-4 h-4 text-green-600"></i> <span class="text-green-700">$16,800</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-purple-600"></i> <span>92% Rate</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Property 3: Pine Court Townhomes -->
+                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow transition flex gap-4 items-start">
+                <img src="/3.jpg" alt="Pine Court" class="w-32 h-24 object-cover rounded-lg" />
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Pine Court Townhomes</h3>
+                        <p class="text-sm text-gray-500 flex items-center gap-1">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i> 789 Pine Road
+                        </p>
+                    </div>
+                    <span class="text-xs text-green-700 font-bold bg-green-100 border border-green-700 px-2 py-0.5 rounded-full">Active</span>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600 grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-indigo-500"></i> <span><strong>6</strong> Units</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="users" class="w-4 h-4 text-blue-500"></i> <span><strong>5/6</strong> Occupied</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="dollar-sign" class="w-4 h-4 text-green-600"></i> <span class="text-green-700">$8,400</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-purple-600"></i> <span>83% Rate</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
             </div>
 
-            <!-- Property 2 -->
-            <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
-                <div class="relative">
-                <img src="/2.jpg" class="w-full h-44 object-cover transition group-hover:scale-105" />
-                <div class="absolute top-2 left-2 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">Active</div>
-                </div>
-                <div class="p-4">
-                <div class="flex justify-between items-center">
-                    <h3 class="font-semibold text-lg text-gray-800">Oak Plaza Complex</h3>
-                    <div class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
-                    </svg>
-                    <span class="text-sm font-medium text-gray-700">4.8</span>
-                    </div>
-                </div>
-                <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 456 Oak Avenue</p>
-                <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i></div>
-                    <span class="font-medium"><strong>12</strong> Units</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i></div>
-                    <span class="font-medium"><strong>11/12</strong> Occupied</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-green-100 rounded-md"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i></div>
-                    <span class="font-medium text-green-700">$16,800</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-purple-100 rounded-md"><i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i></div>
-                    <span class="font-medium">92% Rate</span>
-                    </div>
-                </div>
-                </div>
-                <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
-                <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
-                    <i data-lucide="eye" class="w-4 h-4"></i> View
-                </button>
-                <div class="flex items-center gap-2 text-gray-500">
-                    <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
-                    <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
-                    <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
-                </div>
-                </div>
-                <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
-                <div class="flex items-center gap-2">
-                    <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
-                    <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
-                    <button><i data-lucide="phone" class="w-4 h-4"></i></button>
-                </div>
-                <span>Updated 1d ago</span>
-                </div>
-            </div>
 
-            <!-- Property 3 -->
-            <div class="bg-white rounded-xl shadow-sm group overflow-hidden hover:shadow-md transition">
-                <div class="relative">
-                <img src="/3.jpg" class="w-full h-44 object-cover transition group-hover:scale-105" />
-                <div class="absolute top-2 left-2 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">Active</div>
-                </div>
-                <div class="p-4">
-                <div class="flex justify-between items-center">
-                    <h3 class="font-semibold text-lg text-gray-800">Pine Court Townhomes</h3>
-                    <div class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z"/>
-                    </svg>
-                    <span class="text-sm font-medium text-gray-700">4.2</span>
-                    </div>
-                </div>
-                <p class="mt-1 text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 789 Pine Road</p>
-                <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-600">
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="layout-grid" class="w-3.5 h-3.5 text-indigo-500"></i></div>
-                    <span class="font-medium"><strong>6</strong> Units</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-gray-100 rounded-md"><i data-lucide="users" class="w-3.5 h-3.5 text-blue-500"></i></div>
-                    <span class="font-medium"><strong>5/6</strong> Occupied</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-green-100 rounded-md"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-green-600"></i></div>
-                    <span class="font-medium text-green-700">$8,400</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                    <div class="p-1 bg-purple-100 rounded-md"><i data-lucide="activity" class="w-3.5 h-3.5 text-purple-600"></i></div>
-                    <span class="font-medium">83% Rate</span>
-                    </div>
-                </div>
-                </div>
-                <div class="flex justify-between items-center px-4 pb-3 mt-1 text-sm">
-                <button class="text-indigo-600 hover:underline font-medium flex items-center gap-1">
-                    <i data-lucide="eye" class="w-4 h-4"></i> View
-                </button>
-                <div class="flex items-center gap-2 text-gray-500">
-                    <button title="Edit"><i data-lucide="pencil" class="w-4 h-4 hover:text-indigo-500"></i></button>
-                    <button title="Growth"><i data-lucide="trending-up" class="w-4 h-4 hover:text-green-600"></i></button>
-                    <button title="Delete"><i data-lucide="trash-2" class="w-4 h-4 hover:text-red-600"></i></button>
-                </div>
-                </div>
-                <div class="border-t px-4 py-2 text-gray-400 text-xs flex justify-between">
-                <div class="flex items-center gap-2">
-                    <button><i data-lucide="message-circle" class="w-4 h-4"></i></button>
-                    <button><i data-lucide="calendar" class="w-4 h-4"></i></button>
-                    <button><i data-lucide="phone" class="w-4 h-4"></i></button>
-                </div>
-                <span>Updated 4d ago</span>
-                </div>
-            </div>
-
-           </div>
 
 
       </div>
